@@ -1,4 +1,4 @@
-name: CI
+name: Fedora-31-Builder
 
 on: [push]
 
