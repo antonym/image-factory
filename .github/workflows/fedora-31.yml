@@ -1,0 +1,23 @@
+name: CI
+
+on: [push]
+
+jobs:
+  build:
+
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v1
+    - name: Run a multi-line script
+      run: |
+        sudo apt -y install qemu uuid-runtime curl kpartx qemu-utils squashfs-tools python-virtualenv
+        virtualenv /opt/image-builder/
+        source /opt/image-builder/bin/activate
+        sudo pip install diskimage-builder --isolated
+        export COMPRESS_IMAGE='1'
+        export DIB_MODPROBE_BLACKLIST='usb-storage cramfs freevxfs jffs2 hfs hfsplus squashfs udf vfat bluetooth'
+        export DIB_BOOTLOADER_DEFAULT_CMDLINE='nofb nomodeset vga=normal console=tty0 console=ttyS0,115200 audit=1'
+        IMG=ubuntu-bionic-baremetal
+        DIB_RELEASE=bionic DIB_CLOUD_INIT_DATASOURCES="Ec2, ConfigDrive, OpenStack" \
+          disk-image-create fedora baremetal block-device-efi grub2 -o ${IMG}
