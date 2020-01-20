@@ -1,0 +1,19 @@
+name: ipa-ubuntu
+
+on: [push]
+
+jobs:
+  build:
+
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v1
+    - name: Run a multi-line script
+      run: |
+        sudo apt -y install qemu uuid-runtime curl kpartx qemu-utils squashfs-tools python-virtualenv
+        virtualenv /opt/image-builder/
+        source /opt/image-builder/bin/activate
+        sudo pip install --user diskimage-builder ironic-python-agent-builder
+        ironic-python-agent-builder -o ironic-agent-ubuntu
+        
