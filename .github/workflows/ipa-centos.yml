@@ -14,6 +14,6 @@ jobs:
         sudo yum -y install qemu uuid-runtime curl kpartx qemu-utils squashfs-tools python-virtualenv rpm yumdownloader
         virtualenv /opt/image-builder/
         source /opt/image-builder/bin/activate
-        sudo pip install --user diskimage-builder ironic-python-agent-builder
+        sudo pip install diskimage-builder ironic-python-agent-builder
         ironic-python-agent-builder -o ironic-agent-ubuntu centos-minimal --release 8
         
