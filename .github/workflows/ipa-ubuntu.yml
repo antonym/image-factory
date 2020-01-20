@@ -15,5 +15,5 @@ jobs:
         virtualenv /opt/image-builder/
         source /opt/image-builder/bin/activate
         sudo pip install diskimage-builder ironic-python-agent-builder
-        ironic-python-agent-builder -o ironic-agent-ubuntu
+        ironic-python-agent-builder -o ironic-agent-ubuntu ubuntu-minimal
         
