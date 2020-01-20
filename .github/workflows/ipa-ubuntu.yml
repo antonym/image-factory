@@ -11,7 +11,7 @@ jobs:
     - uses: actions/checkout@v1
     - name: Run a multi-line script
       run: |
-        sudo apt -y install qemu uuid-runtime curl kpartx qemu-utils squashfs-tools python-virtualenv
+        sudo apt -y install qemu uuid-runtime curl kpartx qemu-utils squashfs-tools python-virtualenv debootstrap
         virtualenv /opt/image-builder/
         source /opt/image-builder/bin/activate
         sudo pip install --user diskimage-builder ironic-python-agent-builder
